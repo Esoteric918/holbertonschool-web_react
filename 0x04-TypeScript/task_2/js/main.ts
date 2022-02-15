@@ -63,8 +63,6 @@ function teachClass(todayClass: Subjects) {
     return 'Teaching History'
 }
 
-
-
-
 // console.log(executeWork(createEmployee(200)));
 // console.log(executeWork(createEmployee(1000)));
+// console.log(teachClass(to))
