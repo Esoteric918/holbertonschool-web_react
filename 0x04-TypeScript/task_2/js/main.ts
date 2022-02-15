@@ -45,10 +45,8 @@ function isDirecton(employee: Director | Teacher): employee is Director  {
 
 function executeWork(employee: DirectorInterface | TeacherInterface): string {
     if (isDirecton(employee)) {
-        console.log(employee.workDirectorTasks());
         return employee.workDirectorTasks();
     } else {
-        console.log(employee.workTeacherTasks());
         return employee.workTeacherTasks();
     }
 
