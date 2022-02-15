@@ -54,5 +54,17 @@ function executeWork(employee: DirectorInterface | TeacherInterface): string {
 
 }
 
+type Subjects = 'Math' | 'History';
+
+function teachClass(todayClass: Subjects) {
+    if (todayClass === 'Math')
+    return 'Teaching Math';
+    if (todayClass === "History")
+    return 'Teaching History'
+}
+
+
+
+
 // console.log(executeWork(createEmployee(200)));
 // console.log(executeWork(createEmployee(1000)));
