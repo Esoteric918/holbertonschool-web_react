@@ -40,7 +40,7 @@ function createEmployee(salary: number | string): Director | Teacher {
 }
 
 function isDirecton(employee: Director | Teacher): employee is Director  {
-    return 'workDirectorTasks' in employee;
+    return employee instanceof Director;
     }
 
 function executeWork(employee: DirectorInterface | TeacherInterface): string {
@@ -53,3 +53,6 @@ function executeWork(employee: DirectorInterface | TeacherInterface): string {
     }
 
 }
+
+// console.log(executeWork(createEmployee(200)));
+// console.log(executeWork(createEmployee(1000)));
