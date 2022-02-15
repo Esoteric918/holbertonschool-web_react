@@ -29,11 +29,11 @@ interface StudentInterface {
     displayName(): string
 }
 
-interface studendConductor {
+interface studentConstructor {
     new(firstName: string, lastName: string): StudentInterface;
 }
 
-export const StudentClass: studendConductor =
+export const StudentClass: studentConstructor =
 class StudentClass implements StudentInterface {
     firstName: string;
     lastName: string;
