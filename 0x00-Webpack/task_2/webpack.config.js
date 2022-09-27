@@ -11,21 +11,8 @@ module.exports = {
     rules: [{
         test: /\.css$/,
         use: [
-          'css-loader',
-          'style-loader'
-        ],
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true,
-              disable: true,
-            },
-          },
+          'style-loader',
+          'css-loader'
         ],
       },
     ],
