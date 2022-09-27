@@ -1,12 +1,12 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'production',
   entry: './js/dashboard_main.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
-  mode: 'production',
   module: {
     rules: [{
         test: /\.css$/,
@@ -16,7 +16,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpe?g|svg)$/,
         use: [
           'file-loader',
           {
