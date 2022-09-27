@@ -23,6 +23,7 @@ module.exports = {
               bypassOnDebug: true,
               disable: true,
               enforce: 'pre',
+              limit: 10 * 1024,
             },
           },
         ],
