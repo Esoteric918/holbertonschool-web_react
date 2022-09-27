@@ -22,6 +22,7 @@ module.exports = {
             options: {
               bypassOnDebug: true,
               disable: true,
+              enforce: 'pre',
             },
           },
         ],
