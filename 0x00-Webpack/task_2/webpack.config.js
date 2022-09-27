@@ -8,13 +8,24 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.css$/,
+        use: [  'style-loader', 'css-loader' ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
         use: [
-          'style-loader',
-          'css-loader'
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              disable: true,
+            },
+          },
         ],
       },
     ],
-  },
+  }
 };
