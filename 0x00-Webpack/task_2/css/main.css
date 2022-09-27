@@ -5,6 +5,6 @@
 #logo {
     width: 200px;
     height: 200px;
-    background: url(../asset/holberton-logo.jpg) no-repeat;
+    background: url(../asset/holberton-logo.jpg);
     background-size: 200px 200px;
 }
