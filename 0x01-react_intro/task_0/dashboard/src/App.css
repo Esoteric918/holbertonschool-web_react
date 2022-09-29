@@ -1,0 +1,27 @@
+:root{
+    --primary-color: #E11D3F;
+	font: 18px Helvetica, Arial, sans-serif;
+}
+
+.App-header {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+.App-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.App-footer {
+    /* display: flex; */
+    /* flex-direction: row; */
+    border-top: 3px solid var(--primary-color);
+    text-align: center;
+}
