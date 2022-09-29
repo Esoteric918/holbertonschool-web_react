@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.jpg';
 import './App.css';
+import { getFullYear, getFooterCopy } from './utils'
 
 export default class App extends Component {
   render() {
@@ -15,7 +16,7 @@ export default class App extends Component {
 
         </body>
         <footer className='App-footer'>
-          <p>Copyright 2020 - Holberton School</p>
+        <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
         </footer>
       </div>
     );
