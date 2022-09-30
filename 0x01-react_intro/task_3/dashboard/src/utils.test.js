@@ -1,4 +1,6 @@
 import { getFullYear, getLatestNotification, getFooterCopy } from './utils';
+import { expect } from 'chai';
+
 
 describe('getFullYear', () => {
   it('returns the current year', () => {
