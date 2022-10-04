@@ -4,6 +4,7 @@ import React from "react";
 
 describe("Footer", () => {
   it("renders without crashing", () => {
-    shallow(<Footer />);
+    const wrapper = shallow(<Footer />);
+    expect(wrapper.exists()).toBe(true);
   });
 });

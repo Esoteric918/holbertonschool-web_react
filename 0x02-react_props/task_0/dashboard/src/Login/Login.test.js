@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Header from "./Header";
+import Login from "./Login";
 
-describe("Header /", () => {
+describe("Login", () => {
   it("renders without crashing", () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = shallow(<Login />);
     expect(wrapper.exists()).toBe(true);
   });
 });
