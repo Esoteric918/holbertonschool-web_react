@@ -1,22 +1,26 @@
-import React from 'react';
-import Notifications from './Notifications';
 import { shallow } from 'enzyme';
-import { assert } from 'chai';
+import React from 'react';
+import NotificationItem from './NotificationItem';
 
-describe('Notifications component', () => {
-  it('renders without crashing', () => {
-    shallow(<Notifications />);
+describe('<NotificationItem />', () => {
+  it('renders NotificationIem without crashing', () => {
+    const wrapper = shallow(<NotificationItem />);
+    expect(wrapper.exists()).toBe(true);
   });
-
-  it('Notifications renders 3 list items', () => {
-    const wrapper = shallow(<Notifications />);
-    const notifWrapper = wrapper.find('li');
-    assert.equal(notifWrapper.length, 3);
+  it('renders correct html', () => {
+    const wrapper = shallow(<NotificationItem />);
+    expect(wrapper.html()).toContain('<li data-notification-type="default"></li>');
   });
-
-  it('Notifications renders correct p tag', () => {
-    const wrapper = shallow(<Notifications />);
-    const notifWrapper = wrapper.find('p');
-    expect(notifWrapper.text()).toEqual('Here is the list of notifications');
+  it('renders correct html with type', () => {
+    const wrapper = shallow(<NotificationItem type="urgent" />);
+    expect(wrapper.html()).toContain('<li data-notification-type="urgent"></li>');
+  });
+  it('renders correct html with type and value', () => {
+    const wrapper = shallow(<NotificationItem type="urgent" value="test" />);
+    expect(wrapper.html()).toContain('<li data-notification-type="urgent">test</li>');
+  });
+  it('renders correct html with type and html', () => {
+    const wrapper = shallow(<NotificationItem type="urgent" html={{ __html: '<u>test</u>' }} />);
+    expect(wrapper.html()).toContain('<li data-notification-type="urgent"><u>test</u></li>');
   });
 });
