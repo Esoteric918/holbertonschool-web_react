@@ -5,6 +5,7 @@ import Notifications from '../Notifications/Notifications'
 import Login from '../Login/Login';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import CourseList from '../CourseList/CourseList';
 
 class App extends React.Component {
   render() {
