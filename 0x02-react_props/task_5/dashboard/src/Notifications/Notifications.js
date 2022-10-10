@@ -1,22 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
-import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
-import PropTypes from 'prop-types';
+import NotificationItemShape from './NotificationItemShape';
 
 
-export default function Notifications({ displayDrawer }) {
+export default function Notifications({ displayDrawer, listNotifications }) {
   return (
     <><div className='menuItem'> Your notifications </div>
-      {displayDrawer &&
-    <div className="Notifications">
-        <p>Here is the list of notifications</p>
-      <ul>
-        <NotificationItem type="default" value="New course available" />
-        <NotificationItem type="urgent" value="New resume available" />
-        <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
-      </ul>
+      {displayDrawer && (
+        <div className="Notifications">
+        {
+          listNotifications.length ? (
+            <p>Here is the list of notifications</p>
+          ) : ( <p>"No new notification for now"</p>
+              )}
+              {listNotifications ? (
+                listNotifications.map((Note) =>
+                    <NotificationItem
+                    key={Note.id}
+                    type={Note.type}
+                    value={Note.value}
+                    html={Note.html} />
+              )
+              ) : (
+                <tr>No course available yet</tr>
+        )}
       <button
         style={{
           border: 0,
@@ -30,14 +40,17 @@ export default function Notifications({ displayDrawer }) {
       >
         <img src={closeIcon} height="15px" width="15" alt="close icon" />
       </button>
-    </div>}</>
+    </div>)}
+    </>
   );
 }
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 
 Notifications.defaultProps = {
+  listNotifications: [],
   displayDrawer: false,
 };

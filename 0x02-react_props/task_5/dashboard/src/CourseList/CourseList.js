@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './CourseList.css';
 import CourseListRow from './CourseListRow';
-
+import PropTypes from 'prop-types';
+import CourseShape from './CourseShape';
 
 
 export default class CourseList extends Component {
@@ -13,16 +14,22 @@ export default class CourseList extends Component {
           <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
         </thead>
         <tbody>
-          <CourseListRow textFirstCell="ES6" textSecondCell="60" />
-          <CourseListRow textFirstCell="Webpack" textSecondCell="20" />
-          <CourseListRow textFirstCell="React" textSecondCell="40" />
+          {
+             this.props.listCourses.length ? this.props.listCourses.map((course) =>
+              <CourseListRow textFirstCell={course.name} textSecondCell={course.credit} key={course.id} />
+             )
+             : <CourseListRow textFirstCell="No course available yet" isHeader={true} />
+          }
         </tbody>
       </table>
     );
   }
 }
 
+CourseList.propTypes = {
+  listCourses: PropTypes.arrayOf(CourseShape),
+};
+
 CourseList.defaultProps = {
   listCourses: []
 }
-
