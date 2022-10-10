@@ -3,11 +3,15 @@ import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
 import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
+import PropTypes from 'prop-types';
 
-export default function Notifications() {
+
+export default function Notifications({ displayDrawer }) {
   return (
+    <><div className='menuItem'> Your notifications </div>
+      {displayDrawer &&
     <div className="Notifications">
-      <p>Here is the list of notifications</p>
+        <p>Here is the list of notifications</p>
       <ul>
         <NotificationItem type="default" value="New course available" />
         <NotificationItem type="urgent" value="New resume available" />
@@ -26,6 +30,14 @@ export default function Notifications() {
       >
         <img src={closeIcon} height="15px" width="15" alt="close icon" />
       </button>
-    </div>
+    </div>}</>
   );
 }
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+};
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+};

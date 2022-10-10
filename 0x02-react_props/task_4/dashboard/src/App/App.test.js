@@ -20,3 +20,14 @@ describe('App', () => {
     expect(wrapper.find('Footer').exists()).toBe(true);
   })
 });
+
+describe('App - isLoggedIn', () => {
+  it('renders CourseList component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} />);
+    expect(wrapper.find('CourseList').exists()).toBe(true);
+  })
+  it('does not render Login component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} />);
+    expect(wrapper.find('Login').exists()).toBe(false);
+  })
+});
