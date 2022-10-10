@@ -22,8 +22,20 @@ const listNotifications = [
   {id: 2, type: 'urgent', value: 'New resume available'},
   {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
 ];
-
 class App extends React.Component {
+  componentDidMount() {
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.key === 'h') {
+        e.preventDefault();
+        alert("Logging you out");
+        this.props.logOut();
+      }
+    });
+  }
+  // componentWillUnmount() {
+  //   document.removeEventListener("keydown", (e) => {});
+  // }
+
   render() {
     const { isLoggedIn } = this.props;
     return (
@@ -44,11 +56,13 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 App.defaultProps = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  logOut: () => {console.log("Logging you out")},
 };
 
 export default App;
