@@ -5,10 +5,23 @@ import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
+// creat a new React component Notifications
 
-export default function Notifications({ displayDrawer, listNotifications }) {
-  return (
-    <><div className='menuItem'> Your notifications </div>
+export default class Notifications extends React.Component {
+  constructor() {
+    super();
+    this.markAsRead = this.markAsRead.bind(this);
+  } // end of constructor
+
+  markAsRead(id) {
+    console.log(`Notification ${id} has been marked as read`);
+  }
+
+  render() {
+    const { displayDrawer, listNotifications } = this.props;
+
+    return (
+      <><div className='menuItem'> Your notifications </div>
       {displayDrawer && (
         <div className="Notifications">
         {
@@ -43,6 +56,7 @@ export default function Notifications({ displayDrawer, listNotifications }) {
     </div>)}
     </>
   );
+  }
 }
 
 Notifications.propTypes = {
