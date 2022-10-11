@@ -26,16 +26,15 @@ class App extends React.Component {
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === 'h') {
-        // e.preventDefault();
+        e.preventDefault();
         alert("Logging you out");
         this.props.logOut();
       }
     });
   }
-  componentWillUnmount() {
-    document.removeEventListener("keydown", (e) => {});
-  }
-
+  // componentWillUnmount() {
+  //   document.removeEventListener("keydown", (e) => {});
+  // }
 
   render() {
     const { isLoggedIn } = this.props;
