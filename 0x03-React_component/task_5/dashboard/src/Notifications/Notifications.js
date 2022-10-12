@@ -15,7 +15,6 @@ class Notifications extends React.Component {
   }
   // function that makes the file only update when next listNotifications is longer than current
   shouldComponentUpdate(nextProps) {
-    console.log(nextProps.listNotifications.length > this.props.listNotifications.length);
     return nextProps.listNotifications.length > this.props.listNotifications.length;
   }
 
