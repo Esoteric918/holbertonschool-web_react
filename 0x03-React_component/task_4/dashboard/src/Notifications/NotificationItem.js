@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 class NotificationItem extends React.Component {
   render() {
     const { type, value, html, markAsRead } = this.props;
-    console.log(type, value, html, markAsRead);
     if (html) {
       return (
         <li data-notification-type={type} dangerouslySetInnerHTML={html} onClick={markAsRead} />
@@ -20,19 +19,6 @@ class NotificationItem extends React.Component {
 
     }
   }
-// const NotificationItem = ({ type, value, html, markAsRead, id }) => {
-//   if (value) {
-//     return (
-//       <li data-notification-type={type} onClick={markAsRead(id)}>
-//         {html ? html : value}
-//       </li>
-//     );
-//   }
-//   return(
-//     <li data-notification-type={type} dangerouslySetInnerHTML={html} onClick={markAsRead(id)} />
-//   );
-
-// }
 
 NotificationItem.propTypes = {
   html: PropTypes.shape({ __html: PropTypes.string }),
