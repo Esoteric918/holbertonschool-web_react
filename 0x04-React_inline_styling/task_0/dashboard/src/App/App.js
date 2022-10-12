@@ -44,7 +44,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Notifications displayDrawer={true} listNotifications={listNotifications}/>
-        <div className="App">
+        <div className="App" >
           <Header />
           <div className="App-body">
             {isLoggedIn ?

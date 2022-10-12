@@ -3,6 +3,11 @@ import PropTypes, { string } from 'prop-types';
 import "./CourseList.css";
 
 function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
+    const style = {
+      tr_bg: {backgroundColor: textSecondCell < 30 ? "#deb5b545" : "#f5f5f5ab"},
+
+    }
+
     if (isHeader) {
       if (textSecondCell) {
         return <tr><th>{textFirstCell}</th><th>{textSecondCell}</th></tr>;
@@ -10,7 +15,7 @@ function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
         return <tr><th colSpan="2">{textFirstCell}</th></tr>;
       }
     }
-    return <tr><td>{textFirstCell}</td><td>{textSecondCell}</td></tr>;
+    return <tr style={style.tr_bg}><td>{textFirstCell}</td><td>{textSecondCell}</td></tr>;
 };
 
 CourseListRow.defaultProps = {
