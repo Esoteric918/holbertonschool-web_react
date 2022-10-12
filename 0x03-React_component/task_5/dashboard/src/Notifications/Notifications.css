@@ -11,8 +11,15 @@ div .Notifications {
 }
 .menuItem {
     position: absolute;
-
     right: 1rem;
+
+}
+/* close icon for Notifications  not placed correctly */
+#closeIcon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
 
 }
 

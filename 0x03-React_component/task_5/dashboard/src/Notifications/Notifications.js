@@ -4,17 +4,19 @@ import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
+import WithLogging from '../HOC/WithLogging';
 
 // creat a new React component Notifications
 
-export default class Notifications extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.markAsRead = this.markAsRead.bind(this);
-  // } // end of constructor
-
+class Notifications extends React.Component {
+  // function that marks a notification as read
   markAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
+  }
+  // function that makes the file only update when next listNotifications is longer than current
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps.listNotifications.length > this.props.listNotifications.length);
+    return nextProps.listNotifications.length > this.props.listNotifications.length;
   }
 
   render() {
@@ -41,7 +43,6 @@ export default class Notifications extends React.Component {
           </>
           : <p>No New notifications for now</p>
         }
-
       <button
         style={{
           border: 0,
@@ -53,7 +54,7 @@ export default class Notifications extends React.Component {
         aria-label="Close"
         onClick={() => console.log('Close button has been clicked')}
       >
-        <img src={closeIcon} height="15px" width="15" alt="close icon" />
+        <img src={closeIcon} height="15px" width="15" alt="close icon" id="closeIcon"/>
       </button>
     </div>)}
     </>
@@ -61,12 +62,15 @@ export default class Notifications extends React.Component {
   }
 }
 
+// set the default props for the Notifications component
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
-
+// set default props
 Notifications.defaultProps = {
   listNotifications: [],
   displayDrawer: false,
 };
+
+export default Notifications;

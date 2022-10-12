@@ -35,7 +35,6 @@ describe('<Notifications />', () => {
 		expect(wrapper.find('.menuItem').length).toBe(1);
 	})
 
-
   it('Checks that the div Notifications is rendered when displayDrawer is true', () => {
 		const wrapper = shallow(<Notifications displayDrawer />);
 		expect(wrapper.find('.Notifications').length).toBe(1);
@@ -65,4 +64,14 @@ describe('<Notifications />', () => {
     expect(spy).toHaveBeenCalledWith('Notification 1 has been marked as read');
   })
 
+  it('Check that when updating the props of the component with the same list, the component doesn’t rerender', () => {
+    const wrapper = shallow(<Notifications listNotifications={notesList}/>);
+    const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: notesList});
+    expect(shouldUpdate).toEqual(false);
+  });
+  it('Check that when updating the props of the component with a longer list, the component does rerender', () => {
+    const wrapper = shallow(<Notifications listNotifications={notesList}/>);
+    const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: [...notesList, {id: 4, type: 'urgent', value: 'New resume available'}]});
+    expect(shouldUpdate).toEqual(true);
+  });
 });
