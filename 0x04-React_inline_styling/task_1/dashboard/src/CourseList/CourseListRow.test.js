@@ -1,6 +1,7 @@
 import React from 'react';
 import CourseListRow from './CourseListRow';
 import { shallow } from '../../config/setupTests';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 const Clists = [
   {id: 1, name: 'ES6', credit: 60},
@@ -9,6 +10,14 @@ const Clists = [
 ];
 
 describe('CourseListRow', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('renders without crashing', () => {
     const wrapper = shallow(<CourseListRow textFirstCell='Fisrt cell'/>);
     expect(wrapper.exists()).toBe(true);

@@ -1,7 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import CourseList from "./CourseList";
-import { any } from "prop-types";
+import { StyleSheetTestUtils } from "aphrodite";
+
 
 const Clists = [
   {id: 1, name: 'ES6', credit: 60},
@@ -10,6 +11,13 @@ const Clists = [
 ];
 
 describe("CourseList", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     const wrapper = shallow(<CourseList />);
     expect(wrapper.exists()).toBe(true);

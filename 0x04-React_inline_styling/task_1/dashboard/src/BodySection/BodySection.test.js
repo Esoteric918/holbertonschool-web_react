@@ -24,7 +24,7 @@ describe('BodySection Renders', () => {
   });
 
   it('with correct children', () => {
-    expect(BS.children().length).toBe(2);
+    expect(BS.children().length).toBe(1);
     expect(BS.find('h2').length).toBe(1);
     expect(BS.find('h2').text()).toBe('test title');
     expect(BS.find('p').length).toBe(1);

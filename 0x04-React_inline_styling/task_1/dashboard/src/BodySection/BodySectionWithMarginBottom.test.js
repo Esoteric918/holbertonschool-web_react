@@ -26,9 +26,6 @@ describe('BodySectionWithMarginBottom Renders', () => {
     expect(BSMargin.length).toBe(1);
   });
 
-  it('with correct CSS class', () => {
-    expect(BSMargin.find('.bodySectionWithMargin').length).toBe(1);
-  });
 
   it('with correct children', () => {
     expect(bodySection.length).toBe(1);
