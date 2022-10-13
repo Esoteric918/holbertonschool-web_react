@@ -2,11 +2,20 @@ import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 import NotificationItem from './NotificationItem';
 import Adapter from 'enzyme-adapter-react-16';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 // shallow render NotificationItem component
 describe('<NotificationItem />', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
 	it('Tests that NotificationItem renders without crashing', () => {
 		const wrapper = shallow(<NotificationItem />);
 		expect(wrapper.exists()).toBe(true);

@@ -1,13 +1,13 @@
-table {
+/* table {
     display: table;
     width: 90%;
     border-collapse: collapse;
     border: 1px solid black;
     margin: auto;
-}
+} */
 
-tr th {
-    text-align: start;
+th {
+    text-align: center;
     border-bottom: 1px solid black;
 }
 

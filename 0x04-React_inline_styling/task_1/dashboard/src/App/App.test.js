@@ -1,8 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
+import { StyleSheetTestUtils } from 'aphrodite';
+
 
 describe('App', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('test App renders without crashing', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.exists()).toBe(true);
@@ -22,6 +31,13 @@ describe('App', () => {
 });
 
 describe('App - isLoggedIn', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('tests CourseList component', () => {
     const wrapper = shallow(<App isLoggedIn={true} />);
     expect(wrapper.find('CourseList').exists()).toBe(true);

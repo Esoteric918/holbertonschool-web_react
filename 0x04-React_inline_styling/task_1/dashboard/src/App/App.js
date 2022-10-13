@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import BodySection from '../BodySection/BodySection';
 import Notifications from '../Notifications/Notifications'
 import Login from '../Login/Login';
@@ -9,7 +8,7 @@ import CourseList from '../CourseList/CourseList';
 import PropTypes from 'prop-types';
 import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
-
+import { StyleSheet, css } from 'aphrodite'
 
 
 // array for the list of courses
@@ -25,6 +24,28 @@ const listNotifications = [
   {id: 2, type: 'urgent', value: 'New resume available'},
   {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
 ];
+
+const styles = StyleSheet.create({
+    body: {
+      fontFamily: 'Verdana',
+      margin: '1rem',
+      scrollBehavior: 'smooth',
+
+    },
+    mainContent: {
+      borderTop: '3px #e11d3f solid',
+    },
+    footer: {
+      borderTop: '3px #e11d3f solid',
+      textAlign: 'center',
+      bottom: 0,
+      width: '100%',
+      textAlign: 'center',
+      fontStyle: 'italic',
+    },
+});
+
+
 class App extends React.Component {
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
@@ -35,18 +56,18 @@ class App extends React.Component {
       }
     });
   }
-  // componentWillUnmount() {
-  //   document.removeEventListener("keydown", (e) => {});
-  // }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", (e) => {});
+  }
 
   render() {
     const { isLoggedIn } = this.props;
     return (
       <React.Fragment>
         <Notifications displayDrawer={true} listNotifications={listNotifications}/>
-        <div className="App" >
+        <div className="App"  >
           <Header />
-          <div className="App-body">
+          <div className={css(styles.body)}>
             {isLoggedIn ?
             <BodySectionWithMarginBottom title="Course List" >
               <p>Lick My BodySection</p>
@@ -61,7 +82,7 @@ class App extends React.Component {
               <p>Im Over It</p>
             </BodySection>
           </div>
-          <div className="App-footer">
+          <div className={css(styles.footer)}>
             <Footer />
           </div>
         </div>

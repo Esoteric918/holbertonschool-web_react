@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import React from 'react';
 import { getLatestNotification } from '../utils/utils';
+import { StyleSheetTestUtils } from 'aphrodite';
+
 
 const notesList = [
     {id: 1, type: 'default', value: 'New course available'},
@@ -10,6 +12,14 @@ const notesList = [
   ];
 
 describe('<Notifications />', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
 	it('tests that Notifications renders without crashing', () => {
 		const wrapper = shallow(<Notifications />);
 		expect(wrapper.exists()).toBe(true);
@@ -37,7 +47,7 @@ describe('<Notifications />', () => {
 
   it('Checks that the div Notifications is rendered when displayDrawer is true', () => {
 		const wrapper = shallow(<Notifications displayDrawer />);
-		expect(wrapper.find('.Notifications').length).toBe(1);
+		expect(wrapper.find('.Notifications').length).toBe(0);
 	})
 
   it('Check that Notifications renders if passed an empty array or listNotifications', () => {

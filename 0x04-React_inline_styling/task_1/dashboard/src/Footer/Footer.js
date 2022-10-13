@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Footer.css';
 import { getFullYear, getFooterCopy } from '../utils/utils';
 
 class Footer extends React.Component {
