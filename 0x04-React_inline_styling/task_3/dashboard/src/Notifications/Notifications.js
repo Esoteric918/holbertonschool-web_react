@@ -7,12 +7,18 @@ import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
+  holeNote: {
+    position: 'absolute',
+    right: 0,
+    '@media (max-width: 900px)': {
+      position: 'relative',
+    },
+  },
   Notif: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: 'block',
     fontSize: 20,
-    // width: props.clicked ? '100vh' : 'auto',
-    // height: props.clicked ? '100vh' : 'auto',
+    padding: '10px 8px',
+    border: '1px dashed #ce314b',
     '@media (min-width: 900px)': {
       marginRight: '1rem',
       float: 'right',
@@ -61,45 +67,45 @@ class Notifications extends React.Component {
     const { displayDrawer, listNotifications } = this.props;
 
     return (
-      <div className={css(styles.Notif)}>
-      <div className={css(styles.menuItem)} id="menuItem">Your Notifications</div>
-      {displayDrawer && (
-        <div className={css(styles.Notifications)} id="Notifs">
-          {listNotifications.length
-            ? <p>Here is the list of notifications</p>
-            : <p>No new notification for now</p>}
-          {listNotifications ? (
-            listNotifications.map((notif) => (
-              <NotificationItem
-                key={notif.id}
-                type={notif.type ? notif.type : 'default'}
-                value={notif.value}
-                html={notif.html}
-                markAsRead={() => this.markAsRead(notif.id)}
+      <div className={css(styles.holeNote)}>
+        <div className={css(styles.menuItem)} id="menuItem">Your Notifications</div>
+        {displayDrawer && (
+          <div className={css(styles.Notif)} id="Notifs">
+            {listNotifications.length
+              ? <p>Here is the list of notifications</p>
+              : <p>No new notification for now</p>}
+            {listNotifications ? (
+              listNotifications.map((notif) => (
+                <NotificationItem
+                  key={notif.id}
+                  type={notif.type ? notif.type : 'default'}
+                  value={notif.value}
+                  html={notif.html}
+                  markAsRead={() => this.markAsRead(notif.id)}
+                />
+              ))
+            ) : (
+              <tr>No course available yet</tr>
+            )}
+            <button
+              type="button"
+              aria-label="Close"
+              className={css(styles.closeBtn)}
+              onClick={() => console.log('Close button has been clicked')}
+            >
+              <img
+                src={closeIcon}
+                alt="Close"
+                width="15px"
+                height="15px"
+                border="0"
               />
-            ))
-          ) : (
-            <tr>No course available yet</tr>
-          )}
-          <button
-            type="button"
-            aria-label="Close"
-            className={css(styles.closeBtn)}
-            onClick={() => console.log('Close button has been clicked')}
-          >
-            <img
-              src={closeIcon}
-              alt="Close"
-              width="15px"
-              height="15px"
-              border="0"
-            />
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 // set the default props for the Notifications component
