@@ -1,22 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes, { string } from 'prop-types';
-import "./CourseList.css";
+import { StyleSheet, css } from 'aphrodite';
 
-function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
-    const style = {
-      tr_bg: {backgroundColor: textSecondCell < 30 ? "#deb5b545" : "#f5f5f5ab"},
+const styles = StyleSheet.create({
+  tblHdr: {
+    borderBottom: '1px solid lightgrey',
+  },
+  colHdr: {
+    textAlign: 'left',
+    borderBottom: '1px solid lightgrey',
+    padding: '10px',
+  },
+  colHdr2: {
+    textAlign: 'left',
+    borderBottom: '1px solid black',
+    padding: '10px',
+  },
+  hdrStyle: {
+    backgroundColor: '#deb5b545',
+  },
+  bdyStyle: {
+    backgroundColor: '#d7e7d7',
+  },
+});
 
-    }
-
+class CourseListRow extends Component {
+  render() {
+    const { isHeader, textFirstCell, textSecondCell } = this.props;
     if (isHeader) {
       if (textSecondCell) {
-        return <tr><th>{textFirstCell}</th><th>{textSecondCell}</th></tr>;
-      } else {
-        return <tr><th colSpan="2">{textFirstCell}</th></tr>;
+        return (
+
+            <tr className={css(styles.tblHdr)}>
+          <th className={css(styles.colHdr)}>{textFirstCell}</th>
+          <th className={css(styles.colHdr)}>Credit</th>
+        </tr>
+        );
       }
+      return (
+           <tr className={css(styles.tblHdr)}>
+            <th className={css(styles.colHdr2)} colSpan="2">
+              {textFirstCell}
+            </th>
+          </tr>
+      );
     }
-    return <tr style={style.tr_bg}><td>{textFirstCell}</td><td>{textSecondCell}</td></tr>;
-};
+    return (
+      <tr className={css(styles.bdyStyle)}>
+        <td >{textFirstCell}</td>
+        <td>{textSecondCell}</td>
+      </tr>
+    );
+  }
+}
 
 CourseListRow.defaultProps = {
   isHeader: false,

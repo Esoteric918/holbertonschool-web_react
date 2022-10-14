@@ -1,32 +1,30 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import WithLogging from './WithLogging';
 import Login from '../Login/Login';
-import { StyleSheetTestUtils } from 'aphrodite';
 
+describe('WithLogging HOC component', () => {
+  // Tests for WithLogging HOC
 
-describe('WithLogging', () => {
-
-  beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
-  });
-  afterEach(() => {
-    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-  });
-
-  it('should log on mount and unmount', () => {
+  it('Verifies that console.log called on mount/unmount of unnamed component', () => {
     const spy = jest.spyOn(console, 'log');
-    const wrapper = mount(< WithLogging Wrapped={<Login />} />);
-    expect(spy).toHaveBeenCalledWith('Component Login is mounted');
+    const WrappedComponent = WithLogging(() => <p />);
+    const wrapper = shallow(<WrappedComponent />);
     wrapper.unmount();
-    expect(spy).toHaveBeenCalledWith('Component Login is going to unmount');
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenNthCalledWith(1, 'Component Component is mounted');
+    expect(spy).toHaveBeenNthCalledWith(2, 'Component Component is going to unmount');
+    spy.mockRestore();
   });
 
-  it('should log on mount and unmount with component name', () => {
+  it('Verifies that console.log called on mount/unmount of named component', () => {
     const spy = jest.spyOn(console, 'log');
-    const wrapper = mount(< WithLogging Wrapped={<Login />} />);
-    expect(spy).toHaveBeenCalledWith('Component Login is mounted');
+    const WrappedComponent = WithLogging(Login);
+    const wrapper = shallow(<WrappedComponent />);
     wrapper.unmount();
-    expect(spy).toHaveBeenCalledWith('Component Login is going to unmount');
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenNthCalledWith(1, 'Component Login is mounted');
+    expect(spy).toHaveBeenNthCalledWith(2, 'Component Login is going to unmount');
+    spy.mockRestore();
   });
 });

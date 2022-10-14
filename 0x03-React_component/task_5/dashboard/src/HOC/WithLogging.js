@@ -29,5 +29,5 @@ WithLogging.propTypes = {
 }
 
 WithLogging.defaultProps = {
-  Wrapped: <div name="bonkers">wtf</div>,
+  Wrapped: <div name=""></div>,
 }

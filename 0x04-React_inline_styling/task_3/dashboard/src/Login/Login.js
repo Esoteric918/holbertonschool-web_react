@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     marginLeft: "1rem",
     justifyContent: "space-between",
     width: "41%",
+    "@media (max-width: 900px)": {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "left",
+
+     },
   },
   input: {
     width: "100%",
@@ -17,7 +23,12 @@ const styles = StyleSheet.create({
     borderRadius: "5px",
     border: "1px solid #e0354b",
     fontSize: "1rem",
-    // marginLeft: "1rem",
+    "@media (max-width: 900px)": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "left",
+
+   },
   },
   button: {
     border: '1px solid lightgrey',
@@ -26,7 +37,7 @@ const styles = StyleSheet.create({
     ':hover': {
       outline: 'none',
       border: '1px solid #e11d3f',
-    }
+    },
   },
 });
 
