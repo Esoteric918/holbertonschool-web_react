@@ -27,13 +27,8 @@ describe('<Notifications />', () => {
 
 	it('Checks first Item renders correct html', () => {
 		const wrapper = shallow(<Notifications />);
-		expect(wrapper.text()).toContain('Your notifications');
+		expect(wrapper.text()).toContain('Your Notifications');
 	})
-
-  it('Checks that menuIitem is renderd when displayDrawer false', () => {
-    const wrapper = shallow(<Notifications displayDrawer={false} />);
-    expect(wrapper.find('.menuItem').length).toEqual(1);
-  });
 
   it('Checks that the div.Notifications is being displayed', () => {
     const wrapper = shallow(<Notifications  displayDrawer={false}/>);
@@ -42,12 +37,7 @@ describe('<Notifications />', () => {
 
   it('Checks that menuItem is rendered when displayDrawer is true', () => {
 		const wrapper = shallow(<Notifications displayDrawer />);
-		expect(wrapper.find('.menuItem').length).toBe(1);
-	})
-
-  it('Checks that the div Notifications is rendered when displayDrawer is true', () => {
-		const wrapper = shallow(<Notifications displayDrawer />);
-		expect(wrapper.find('.Notifications').length).toBe(0);
+		expect(wrapper.find('.menuItem').exists()).toBe(false);
 	})
 
   it('Check that Notifications renders if passed an empty array or listNotifications', () => {
