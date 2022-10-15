@@ -11,7 +11,6 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
 
-
 // array for the list of courses
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},

@@ -26,6 +26,12 @@ const listNotifications = [
 ];
 
 const styles = StyleSheet.create({
+
+  app: {
+    "@media (max-width: 900px)": {
+      display: "none",
+    },
+  },
     body: {
       fontFamily: 'Verdana',
       margin: '1rem',
@@ -65,7 +71,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Notifications displayDrawer={true} listNotifications={listNotifications}/>
-        <div className="App"  >
+        <div className={css(styles.app)} id="App" >
           <Header />
           <div className={css(styles.body)}>
             {isLoggedIn ?

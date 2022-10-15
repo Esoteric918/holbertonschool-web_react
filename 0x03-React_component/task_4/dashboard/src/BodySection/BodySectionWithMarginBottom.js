@@ -15,5 +15,5 @@ export default class BodySectionWithMarginBottom extends Component {
 
 BodySectionWithMarginBottom.propTypes = {
   title: PropTypes.string.isRequired,
-  // children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };

@@ -1,6 +1,7 @@
 import React, { Component }from "react";
 import logo from "../assets/holberton_logo.jpg";
 import { StyleSheet, css } from 'aphrodite';
+import Notifications from "../Notifications/Notifications";
 
 const style = StyleSheet.create({
   header: {
@@ -23,6 +24,7 @@ class Header extends Component {
   render() {
     return (
       <header className={css(style.header)}>
+
         <img src={logo} className={css(style.logo)} alt="logo" />
         <h1 className={css(style.h1)}>School dashboard</h1>
       </header>
