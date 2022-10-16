@@ -53,6 +53,27 @@ const styles = StyleSheet.create({
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {displayDrawer: false};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+  }
+
+ handleDisplayDrawer = () => {
+    this.setState({
+      displayDrawer: true,
+    });
+  }
+
+  handleHideDrawer =() => {
+    this.setState({
+      displayDrawer: false,
+    });
+  }
+
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === 'h') {
@@ -70,7 +91,12 @@ class App extends React.Component {
     const { isLoggedIn } = this.props;
     return (
       <React.Fragment>
-        <Notifications displayDrawer={true} listNotifications={listNotifications}/>
+        <Notifications
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+          listNotifications={listNotifications}
+        />
         <div className={css(styles.app)} id="App" >
           <Header />
           <div className={css(styles.body)}>

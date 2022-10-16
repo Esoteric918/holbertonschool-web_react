@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
@@ -72,15 +71,22 @@ class Notifications extends React.Component {
   }
   // function that makes the file only update when next listNotifications is longer than current
   shouldComponentUpdate(nextProps) {
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+    if (this.props.displayDrawer !== nextProps.displayDrawer) {
+      return (
+        nextProps.listNotifications.length > this.props.listNotifications.length
+      )
+    }
+    return false;
   }
 
   render() {
-    const { displayDrawer, listNotifications } = this.props;
+    const { displayDrawer, listNotifications} = this.props;
 
     return (
       <div className={css(styles.holeNote)}>
-        <div className={css(styles.menuItem)} id="menuItem">Your Notifications</div>
+        <div className={css(styles.menuItem)} id="menuItem">
+          <p onClick={this.props.handleDisplayDrawer}>Your Notifications</p>
+        </div>
         {displayDrawer && (
           <div className={css(styles.Notif)} id="Notifs">
             {listNotifications.length
@@ -103,7 +109,7 @@ class Notifications extends React.Component {
               type="button"
               aria-label="Close"
               className={css(styles.closeBtn)}
-              onClick={() => console.log('Close button has been clicked')}
+              onClick={this.props.handleHideDrawer}
             >
               <img
                 src={closeIcon}
@@ -123,12 +129,16 @@ class Notifications extends React.Component {
 // set the default props for the Notifications component
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 // set default props
 Notifications.defaultProps = {
   listNotifications: [],
   displayDrawer: false,
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
 };
 
 export default Notifications;

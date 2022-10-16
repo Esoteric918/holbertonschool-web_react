@@ -28,6 +28,18 @@ describe('App', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find('Footer').exists()).toBe(true);
   })
+  // Add a test to verify that the default state for displayDrawer is false. Verify that after calling handleDisplayDrawer, the state should now be true
+  it('tests default state for displayDrawer is false', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toBe(false);
+  })
+  // Add a test to verify that after calling handleHideDrawer, the state is updated to be false
+  it('tests state for displayDrawer is false after calling handleHideDrawer', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().handleHideDrawer();
+    expect(wrapper.state().displayDrawer).toBe(false);
+  })
+
 });
 
 describe('App - isLoggedIn', () => {

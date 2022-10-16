@@ -53,8 +53,6 @@ describe('<Notifications />', () => {
     const wrapper = shallow(<Notifications listNotifications={[]}/>);
     expect(wrapper.find('.Notifications p').length).toEqual(0);
   })
-//   Create a test, that will mockup the console.log function
-// Check that when calling the function markAsRead on an instance of the component, the spy is being called with the right message
 
   it('Check that when calling the function markAsRead on an instance of the component, the spy is being called with the right message', () => {
     const wrapper = shallow(<Notifications />);
@@ -69,9 +67,29 @@ describe('<Notifications />', () => {
     const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: notesList});
     expect(shouldUpdate).toEqual(false);
   });
+
   it('Check that when updating the props of the component with a longer list, the component does rerender', () => {
     const wrapper = shallow(<Notifications listNotifications={notesList}/>);
     const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: [...notesList, {id: 4, type: 'urgent', value: 'New resume available'}]});
     expect(shouldUpdate).toEqual(true);
   });
+
+  // Add a test to verify that clicking on the menu item calls handleDisplayDrawer
+  it("test that click on close icon calls handleHideDrawer and updates displayDrawer to false", () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    wrapper.setState({ displayDrawer: true });
+    wrapper.find(".close").simulate("click");
+    expect(wrapper.state("displayDrawer")).toBe(true);
+  });
+
+  it("test to verify that clicking on the menu item calls handleDisplayDrawer", () => {
+    const handleDisplayDrawer = jest.fn();
+    const wrapper = shallow(
+      <Notifications handleDisplayDrawer={handleDisplayDrawer} />
+    );
+    wrapper.update();
+    wrapper.find("p").first().simulate("click");
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+
 });
