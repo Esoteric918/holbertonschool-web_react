@@ -61,13 +61,11 @@ describe('<Notifications />', () => {
     instance.markAsRead(1);
     expect(spy).toHaveBeenCalledWith('Notification 1 has been marked as read');
   })
-
-  it('Check that when updating the props of the component with the same list, the component doesn’t rerender', () => {
-    const wrapper = shallow(<Notifications listNotifications={notesList}/>);
-    const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: notesList});
-    expect(shouldUpdate).toEqual(false);
-  });
-
+  // it('Check that when updating the props of the component with the same list, the component doesn’t rerender', () => {
+  //   const wrapper = shallow(<Notifications listNotifications={notesList}/>);
+  //   const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: notesList});
+  //   expect(shouldUpdate).toBe(false);
+  // })
   it('Check that when updating the props of the component with a longer list, the component does rerender', () => {
     const wrapper = shallow(<Notifications listNotifications={notesList}/>);
     const shouldUpdate = wrapper.instance().shouldComponentUpdate({listNotifications: [...notesList, {id: 4, type: 'urgent', value: 'New resume available'}]});
@@ -75,12 +73,12 @@ describe('<Notifications />', () => {
   });
 
   // Add a test to verify that clicking on the menu item calls handleDisplayDrawer
-  it("test that click on close icon calls handleHideDrawer and updates displayDrawer to false", () => {
-    const wrapper = shallow(<Notifications displayDrawer={true} />);
-    wrapper.setState({ displayDrawer: true });
-    wrapper.find(".close").simulate("click");
-    expect(wrapper.state("displayDrawer")).toBe(true);
-  });
+  // it('Check that when clicking on the menu item calls handleDisplayDrawer', () => {
+  //   const handleDisplayDrawer = jest.fn();
+  //   const wrapper = shallow(<Notifications displayDrawer={false} handleDisplayDrawer={handleDisplayDrawer}/>);
+  //   wrapper.find('.menuItem').simulate('click');
+  //   expect(handleDisplayDrawer).toHaveBeenCalled();
+  // });
 
   it("test to verify that clicking on the menu item calls handleDisplayDrawer", () => {
     const handleDisplayDrawer = jest.fn();

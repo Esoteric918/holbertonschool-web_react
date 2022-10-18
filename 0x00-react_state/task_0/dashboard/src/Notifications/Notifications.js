@@ -1,68 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import closeIcon from '../assets/close-icon.png';
-import NotificationItem from './NotificationItem';
-import NotificationItemShape from './NotificationItemShape';
-import { StyleSheet, css } from 'aphrodite';
-
-
-// set oject opacity
-const objOpacity = {  from: { opacity: 0.5 }, to: { opacity: 1 } };
-//create bouce animation
-const bounceEffect = {  from : { transform: 'translateY(0px)' }, to : { transform: 'translateY(-5px)' } };
-
-
-const styles = StyleSheet.create({
-  holeNote: {
-    position: 'absolute',
-    right: 0,
-    '@media (max-width: 900px)': {
-      position: 'relative',
-    },
-  },
-  Notif: {
-    display: 'block',
-    fontSize: 20,
-    padding: '10px 8px',
-    border: '1px dashed #ce314b',
-    '@media (min-width: 900px)': {
-      marginRight: '1rem',
-      float: 'right',
-    },
-  },
-  menuItem: {
-    position: 'fixed',
-    right: 5,
-    backgroundColor: '#fff8f8',
-    cursor: 'pointer',
-    marginBottom: '1rem',
-
-    ':hover': {
-      animationName: [bounceEffect, objOpacity],
-      animationDuration: '0.5s, 0.1s',
-      animationIterationCount: 3,
-    },
-    '@media (max-width: 900px)': {
-     display: 'none',
-    },
-  },
-  notifList: {
-    listStyle: 'none',
-    fontSize: 20,
-    '@media (min-width: 900px)': {
-      zIndex: '1',
-      border: '1px red dashed',
-      padding: '1rem 7rem 2rem 2rem',
-    },
-  },
-  closeBtn: {
-    border: 0,
-    position: 'absolute',
-    right: 35,
-    top: 65,
-  },
-});
-
+import React from "react";
+import PropTypes from "prop-types";
+import closeIcon from "../assets/close-icon.png";
+import NotificationItem from "./NotificationItem";
+import NotificationItemShape from "./NotificationItemShape";
+import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.Component {
   // function that marks a notification as read
@@ -71,16 +12,73 @@ class Notifications extends React.Component {
   }
   // function that makes the file only update when next listNotifications is longer than current
   shouldComponentUpdate(nextProps) {
-    if (this.props.displayDrawer !== nextProps.displayDrawer===true) {
-      return (
-        nextProps.listNotifications.length > this.props.listNotifications.length
-      )
-    }
-    return false;
+    return this.props.displayDrawer !== nextProps.displayDrawer
+      ? true
+      : this.props.listNotifications.length <
+          nextProps.listNotifications.length;
   }
 
   render() {
-    const { displayDrawer, listNotifications} = this.props;
+    // set oject opacity
+    const objOpacity = { from: { opacity: 0.5 }, to: { opacity: 1 } };
+    //create bouce animation
+    const bounceEffect = {
+      from: { transform: "translateY(0px)" },
+      to: { transform: "translateY(-5px)" },
+    };
+
+    const styles = StyleSheet.create({
+      holeNote: {
+        position: "absolute",
+        right: 0,
+        "@media (max-width: 900px)": {
+          position: "relative",
+        },
+      },
+      Notif: {
+        display: "block",
+        fontSize: 20,
+        padding: "10px 8px",
+        border: "1px dashed #ce314b",
+        "@media (min-width: 900px)": {
+          marginRight: "1rem",
+          float: "right",
+        },
+      },
+      menuItem: {
+        position: "fixed",
+        right: 5,
+        backgroundColor: "#fff8f8",
+        cursor: "pointer",
+        marginBottom: "1rem",
+
+        ":hover": {
+          animationName: [bounceEffect, objOpacity],
+          animationDuration: "0.5s, 0.1s",
+          animationIterationCount: 3,
+        },
+        "@media (max-width: 900px)": {
+          display: "none",
+        },
+      },
+      notifList: {
+        listStyle: "none",
+        fontSize: 20,
+        "@media (min-width: 900px)": {
+          zIndex: "1",
+          border: "1px red dashed",
+          padding: "1rem 7rem 2rem 2rem",
+        },
+      },
+      closeBtn: {
+        border: 0,
+        position: "absolute",
+        right: 35,
+        top: 65,
+      },
+    });
+
+    const { displayDrawer, listNotifications } = this.props;
 
     return (
       <div className={css(styles.holeNote)}>
@@ -89,14 +87,16 @@ class Notifications extends React.Component {
         </div>
         {displayDrawer && (
           <div className={css(styles.Notif)} id="Notifs">
-            {listNotifications.length
-              ? <p>Here is the list of notifications</p>
-              : <p>No new notification for now</p>}
+            {listNotifications.length ? (
+              <p>Here is the list of notifications</p>
+            ) : (
+              <p>No new notification for now</p>
+            )}
             {listNotifications ? (
               listNotifications.map((notif) => (
                 <NotificationItem
                   key={notif.id}
-                  type={notif.type ? notif.type : 'default'}
+                  type={notif.type ? notif.type : "default"}
                   value={notif.value}
                   html={notif.html}
                   markAsRead={() => this.markAsRead(notif.id)}
