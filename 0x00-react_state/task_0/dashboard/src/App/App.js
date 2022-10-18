@@ -27,11 +27,11 @@ const listNotifications = [
 
 const styles = StyleSheet.create({
 
-  app: {
-    "@media (max-width: 900px)": {
-      display: "none",
-    },
-  },
+  // app: {
+  //   "@media (max-width: 900px)": {
+  //     display: "none",
+  //   },
+  // },
     body: {
       fontFamily: 'Verdana',
       margin: '1rem',

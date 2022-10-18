@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     marginBottom: '1rem',
 
     ':hover': {
-      animationName: [bounceEffect],
-      animationDuration: '0.5s',
+      animationName: [bounceEffect, objOpacity],
+      animationDuration: '0.5s, 0.1s',
       animationIterationCount: 3,
     },
     '@media (max-width: 900px)': {
@@ -71,7 +71,7 @@ class Notifications extends React.Component {
   }
   // function that makes the file only update when next listNotifications is longer than current
   shouldComponentUpdate(nextProps) {
-    if (this.props.displayDrawer !== nextProps.displayDrawer) {
+    if (this.props.displayDrawer !== nextProps.displayDrawer===true) {
       return (
         nextProps.listNotifications.length > this.props.listNotifications.length
       )
