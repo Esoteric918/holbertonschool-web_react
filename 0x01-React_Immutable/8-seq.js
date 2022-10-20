@@ -13,7 +13,6 @@ function printBestStudents(students) {
     const student = bestStudentsNames[key];
     student.firsName = CapStudents(student.firstName);
     student.lastName = CapStudents(student.lastName);
-    return student;
   });
   console.log(bestStudentsNames);
 }
