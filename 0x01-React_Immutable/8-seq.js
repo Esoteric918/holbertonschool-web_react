@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-export function printBestStudents(students) {
+export default function printBestStudents(students) {
   const Seggs = Immutable.Seq(students);
 
   const bestStudents = Seggs.filter((student) => student.score > 70);
