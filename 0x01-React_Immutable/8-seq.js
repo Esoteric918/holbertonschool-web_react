@@ -18,5 +18,4 @@ function printBestStudents(students) {
   console.log(bestStudentsNames);
 };
 
-
 export default printBestStudents;
