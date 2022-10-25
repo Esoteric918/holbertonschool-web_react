@@ -29,6 +29,17 @@ describe('getAllNotificationsByUser', () => {
     ]);
   })
 
+  it('Checks if normalizedData has correct users', () => {
+    const user = '5debd764a7c57c7839d722e9'
+    expect(normalizedData.entities.users[user]).toEqual({
+      age: 25,
+      email: "poole.sanders@holberton.nz",
+      id: "5debd764a7c57c7839d722e9",
+      name: { first: "Poole", last: "Sanders" },
+      picture: "http://placehold.it/32x32"
+    });
+  })
+
   it('Verifies that normalized data has correct messages entity for given guid', () => {
     const message = 'efb6c485-00f7-4fdf-97cc-5e12d14d6c41';
     expect(normalizedData.entities.messages[message]).toEqual({
