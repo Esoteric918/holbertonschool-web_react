@@ -1,13 +1,8 @@
 import { bindActionCreators } from 'redux';
-import {
-  LOGIN,
-  LOGOUT,
-  DISPLAY_NOTIFICATION_DRAWER,
-  HIDE_NOTIFICATION_DRAWER
-} from './uiActionTypes';
+import { UIActType } from './uiActionTypes';
 
 export const login = (email, password) => ({
-  type: LOGIN,
+  type: UIActType.LOGIN,
   user: {
     email,
     password
@@ -15,15 +10,40 @@ export const login = (email, password) => ({
 });
 
 export const logout = () => ({
-  type: LOGOUT,
+  type: UIActType.LOGOUT,
 });
 
+export const logginSuccess = () => ({
+  type: UIActType.LOGGIN_SUCCESS,
+});
+
+export const logginFailure = () => ({
+  type: UIActType.LOGGIN_FAILURE,
+});
+
+export function logginRequest(email, password) {
+  return async (dispatch) => {
+    dispatch(login(email, password));
+    try {
+      const response = await fetch('/login-success.json');
+      const body = await response.json();
+      if (body.data) {
+        dispatch(logginSuccess());
+      } else {
+        dispatch(logginFailure());
+      }
+    } catch {
+      dispatch(logginFailure());
+    }
+  };
+}
+
 export const displayNotificationDrawer = () => ({
-  type: DISPLAY_NOTIFICATION_DRAWER,
+  type: UIActType.DISPLAY_NOTIFICATION_DRAWER,
 });
 
 export const hideNotificationDrawer = () => ({
-  type: HIDE_NOTIFICATION_DRAWER,
+  type: UIActType.HIDE_NOTIFICATION_DRAWER,
 });
 
 export const boundActionCreators = (dispatch) =>
@@ -31,5 +51,5 @@ export const boundActionCreators = (dispatch) =>
     login,
     logout,
     displayNotificationDrawer,
-    hideNotificationDrawer
+    hideNotificationDrawer,
   }, dispatch);
