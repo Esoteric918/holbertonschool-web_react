@@ -25,7 +25,7 @@ export function logginRequest(email, password) {
   return async (dispatch) => {
     dispatch(login(email, password));
     try {
-      const response = await fetch('/login-success.json');
+      const response = await fetch('http://localhost:3000/login-success.json');
       const body = await response.json();
       if (body.data) {
         dispatch(logginSuccess());
