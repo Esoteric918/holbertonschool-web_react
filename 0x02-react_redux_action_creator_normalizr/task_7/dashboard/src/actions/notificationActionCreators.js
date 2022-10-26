@@ -1,5 +1,4 @@
 import noteTypes, { NotificationTypeFilters } from './notificationActionTypes';
-import { bindActionCreators } from 'redux';
 
 export function markAsAread(index) {
   return {
@@ -14,8 +13,3 @@ export function setNotificationFilter(filter) {
     filter: NotificationTypeFilters[filter.toUpperCase()],
   };
 }
-
-// creatre a boundActionCreators function
-
-export const boundActionCreators = (dispatch) =>
-  bindActionCreators({ markAsAread, setNotificationFilter }, dispatch);
