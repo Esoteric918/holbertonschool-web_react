@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -14,38 +15,23 @@ const initialState = {
 };
 
 const uiReducer = (state = initialState, action) => {
+  // Update the different part of the reducer function to use set from Map
   switch (action.type) {
-    case DISPLAY_NOTIFICATION_DRAWER:
-      return {
-        ...state,
-        isNotificationDrawerVisible: true,
-      };
-    case HIDE_NOTIFICATION_DRAWER:
-      return {
-        ...state,
-        isNotificationDrawerVisible: false,
-      };
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isUserLoggedIn: true,
-        user: action.user,
-      };
+      return Map(state).set('isUserLoggedIn', true);
     case LOGIN_FAILURE:
-      return {
-        ...state,
-        isUserLoggedIn: false,
-        user: {},
-      };
+      return Map(state).set('isUserLoggedIn', false);
     case LOGOUT:
-      return {
-        ...state,
-        isUserLoggedIn: false,
-        user: {},
-      };
+      return Map(state).set('isUserLoggedIn', false);
+    case LOGIN:
+      return Map(state).set('user', action.user);
+    case DISPLAY_NOTIFICATION_DRAWER:
+      return Map(state).set('isNotificationDrawerVisible', true);
+    case HIDE_NOTIFICATION_DRAWER:
+      return Map(state).set('isNotificationDrawerVisible', false);
     default:
       return state;
   }
-}
+};
 
 export default uiReducer;
