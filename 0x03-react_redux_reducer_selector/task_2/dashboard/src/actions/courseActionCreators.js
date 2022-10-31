@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 export const selectCourse = (course) => {
   return {
     type: SELECT_COURSE,
-    index,
+    index: 2,
     // payload: { course, selected: true },
   };
 }
@@ -14,7 +14,7 @@ export const selectCourse = (course) => {
 export const unSelectCourse = (course) => {
   return {
     type: UNSELECT_COURSE,
-    index,
+    index: 2,
     // payload: { course, selected: false },
   };
 }
