@@ -11,17 +11,14 @@ const initialState = {
 const courseReducer = (state = initialState, action) => {
   switch (action.type) {
     case corActTypes.FETCH_COURSE_SUCCESS:
-      return {
-        ...state,
-        courses: action.courses,
-
-      };
+      return state.map((course) => ({
+        ...course,
+        isSelected: false,
+      }));
     case corActTypes.SELECT_COURSE:
       return {
-        ...state,
-        isSelected: true,
-        courses: state.courses.map((course) => {
-          if (course.id === action.id) {
+        courses: state.map((course) => {
+          if (course.id === action.index) {
             return {
               ...course,
               isSelected: true,
@@ -32,10 +29,8 @@ const courseReducer = (state = initialState, action) => {
       };
     case corActTypes.UNSELECT_COURSE:
       return {
-        ...state,
-        isSelected: false,
-        courses: state.courses.map((course) => {
-          if (course.id === action.id) {
+        courses: state.map((course) => {
+          if (course.id === action.index) {
             return {
               ...course,
               isSelected: false,
