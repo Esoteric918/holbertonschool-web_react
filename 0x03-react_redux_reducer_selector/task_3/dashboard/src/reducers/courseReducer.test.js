@@ -1,54 +1,52 @@
-import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from "../actions/courseActionTypes";
+import {corTypes } from "../actions/courseActionTypes";
 import courseReducer from "./courseReducer";
 
-const initialState = {
-  courses: [],
-  isSelected: false,
-};
 
-const data = [
-  {
-    id: 1,
-    name: "ES6",
-    isSelected: false,
-    credit: 60,
-  },
-  {
-    id: 2,
-    name: "Webpack",
-    isSelected: false,
-    credit: 20,
-  },
-  {
-    id: 3,
-    name: "React",
-    isSelected: false,
-    credit: 40,
-  },
-];
+describe("courseReducer tests", () => {
+  const typeAction = {
+    type: corTypes.FETCH_COURSE_SUCCESS,
+    data: [
+      {
+        id: 1,
+        name: "test",
+        isSelected: false,
+      },
+    ],
+  };
 
-describe("courseReducer", () => {
-  it("Test that the default state returns an empty array", () => {
-    const state = courseReducer(undefined, {});
-    expect(state).toEqual(initialState);
+  let rtnAction = [];
+
+  it("should return the initial state", () => {
+    expect(courseReducer(undefined, {})).toEqual([]);
   });
 
-  it("Test that FETCH_COURSE_SUCCESS returns the data passed", () => {
-    const action = { type: FETCH_COURSE_SUCCESS, data };
-    const newState = courseReducer(data, action);
-    expect(newState).toEqual(data);
+  it("should return the new state", () => {
+    expect(courseReducer([], typeAction)).toEqual([
+      {
+        id: 1,
+        name: "test",
+        isSelected: false,
+      },
+    ]);
   });
 
-  it("Test that SELECT_COURSE returns the data with the right item updated", () => {
-    const index = 2
-    const action = { type: SELECT_COURSE, index };
-    expect(courseReducer(data, action)).toEqual(data);
+  it('test SELECT_COURSE returns action with correct data', () => {
+    rtnAction = courseReducer( [{
+      id: 1,
+      name: "test",
+      isSelected: false,
+    }], { type: corTypes.SELECT_COURSE, index: 1});
+    expect(rtnAction).toEqual([{ id: 1, isSelected: true , name: "test"}]);
   });
 
-  it("Test that UNSELECT_COURSE returns the data with the right item updated", () => {
-    const state = courseReducer(undefined, {
-      type: UNSELECT_COURSE,
-    });
-    expect(state).toEqual({ ...initialState, isSelected: false });
+  it('test UNSELECT_COURSE returns action with correct data', () => {
+    rtnAction = courseReducer( [{
+      id: 1,
+      name: "test",
+      isSelected: false,
+    }], { type: corTypes.UNSELECT_COURSE, index: 1});
+    expect(rtnAction).toEqual([{ id: 1, isSelected: false , name: "test"}]);
   });
+
 });
+

@@ -1,17 +1,21 @@
 import { markAsAread, setNotificationFilter } from './notificationActionCreators';
-
+import {  NotificationTypeFilters } from './notificationActionTypes';
 describe('notificationActionCreators', () => {
-  it('markAsAread', () => {
-    expect(markAsAread(1)).toEqual({
+  it('markAsAread to return an action', () => {
+    const index = 1;
+    const action = markAsAread(index);
+    expect(action).toEqual({
       type: 'MARK_AS_READ',
-      index: 1,
+      index,
     });
   });
 
-  it('setNotificationFilter', () => {
-    expect(setNotificationFilter('DEFAULT')).toEqual({
+  it('setNotificationFilter to return an action', () => {
+    const filter = NotificationTypeFilters.URGENT;
+    const action = setNotificationFilter(filter);
+    expect(action).toEqual({
       type: 'SET_TYPE_FILTER',
-      filter: 'DEFAULT',
+      filter
     });
   });
 });

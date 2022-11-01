@@ -1,20 +1,20 @@
-import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
+import { corTypes } from "./courseActionTypes";
 import { bindActionCreators } from "redux";
 
 // bound the selectCourse action creator
-export const selectCourse = (course) => {
+export const selectCourse = (index) => {
   return {
-    type: SELECT_COURSE,
-    index: 2,
+    type: corTypes.SELECT_COURSE,
+    index,
     // payload: { course, selected: true },
   };
 }
 // bound the unSelectCourse action creator
 
-export const unSelectCourse = (course) => {
+export const unSelectCourse = (index) => {
   return {
-    type: UNSELECT_COURSE,
-    index: 2,
+    type: corTypes.UNSELECT_COURSE,
+    index,
     // payload: { course, selected: false },
   };
 }
