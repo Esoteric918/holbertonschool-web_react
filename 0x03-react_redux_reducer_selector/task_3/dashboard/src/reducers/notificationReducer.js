@@ -8,6 +8,9 @@ const initialState = {
   filter: NotificationTypeFilters.DEFAULT,
 };
 
+
+
+
 export default function notificationReducer(state = initialState, action) {
   const filter = {
     type: 'SET_TYPE_FILTER',
