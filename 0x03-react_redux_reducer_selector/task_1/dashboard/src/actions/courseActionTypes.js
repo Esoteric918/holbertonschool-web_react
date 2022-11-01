@@ -1,4 +1,7 @@
 // Define types for course actions
 
-export const SELECT_COURSE = 'SELECT_COURSE';
-export const UNSELECT_COURSE = 'UNSELECT_COURSE';
+export const corTypes = {
+  FETCH_COURSE_SUCCESS: 'FETCH_COURSE_SUCCESS',
+  SELECT_COURSE: 'SELECT_COURSE',
+  UNSELECT_COURSE: 'UNSELECT_COURSE',
+};
