@@ -1,40 +1,34 @@
 import { corTypes } from '../actions/courseActionTypes';
+import { Map } from 'immutable';
+import { coursesNormalizer } from '../schema/courses';
 
 
-// When the action creator sends the action FETCH_COURSE_SUCCESS, it also sends the list of courses in a data attribute. The action would look
+const initialState = Map({
+  courses: Map(
+    {
+      1: Map({
+        id: 1,
+        name: "ES6",
+        credit: 60,
+      }),
+      2: Map({
+        id: 2,
+        name: "Webpack",
+        credit: 20,
+      }),
+    }),
+});
 
-const initialState = [];
 
-
-const courseReducer = (state = initialState, action) => {
+export default function coursesReducer(action, state = initialState) {
   switch (action.type) {
     case corTypes.FETCH_COURSE_SUCCESS:
-      return action.data.map((course) => ({
-        ...course,
-        isSelected: false,
-      }));
+      return state.merge(coursesNormalizer(action.data));
     case corTypes.SELECT_COURSE:
-      return state.map((course) => {
-          if (course.id === action.index) {
-            return {
-              ...course,
-              isSelected: true,
-            };
-        }
-        return course;
-      });
+      return state.setIn(['entities', "courses", action.index, 'isSelected'], true);
     case corTypes.UNSELECT_COURSE:
-      return state.map((course) => {
-        if (course.id === action.index) {
-          return {
-            ...course,
-            isSelected: false,
-          };
-      }
-      return course;
-    });
+      return state.setIn(['entities', "courses", action.index, "isSelected"], false);
     default:
       return state;
   }
 }
-export default courseReducer;

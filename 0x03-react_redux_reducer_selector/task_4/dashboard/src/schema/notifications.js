@@ -20,3 +20,7 @@ export function getAllNotificationsByUser(userId) {
     .filter((note) => note.author == userId)
     .map((note) => notifSchema.entities.messages[note.context]);
 }
+
+export function notificationsNormalizer(data) {
+  return normalize(data, [notification]);
+}
