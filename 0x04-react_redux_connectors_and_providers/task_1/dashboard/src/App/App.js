@@ -1,25 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, StyleSheet } from 'aphrodite';
-import BodySection from '../BodySection/BodySection';
-import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
-import CourseList from '../CourseList/CourseList';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Notifications from '../Notifications/Notifications';
-import WithLogging from '../HOC/WithLogging';
-import { getLatestNotification } from '../utils/utils';
-import AppContext from './AppContext';
-import { connect } from 'react-redux';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { css, StyleSheet } from "aphrodite";
+import BodySection from "../BodySection/BodySection";
+import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
+import CourseList from "../CourseList/CourseList";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import Login from "../Login/Login";
+import Notifications from "../Notifications/Notifications";
+import WithLogging from "../HOC/WithLogging";
+import { getLatestNotification } from "../utils/utils";
+import AppContext from "./AppContext";
+import { connect } from "react-redux";
 
 const listCourses = [
-  { id: '1', name: 'ES6', credit: 60 },
-  { id: '2', name: 'Webpack', credit: 20 },
-  { id: '3', name: 'React', credit: 40 },
+  { id: "1", name: "ES6", credit: 60 },
+  { id: "2", name: "Webpack", credit: 20 },
+  { id: "3", name: "React", credit: 40 },
 ];
-
 
 export default class App extends React.Component {
   static contextType = AppContext;
@@ -31,9 +29,9 @@ export default class App extends React.Component {
       user: AppContext._currentValue.user,
       logout: AppContext._currentValue.logout,
       listNotifications: [
-        { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' },
-        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
       ],
     };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -53,13 +51,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeydown);
-    document.addEventListener('keydown', this.logoutListener);
+    window.addEventListener("keydown", this.handleKeydown);
+    document.addEventListener("keydown", this.logoutListener);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeydown);
-    document.removeEventListener('keydown', this.logoutListener);
+    window.removeEventListener("keydown", this.handleKeydown);
+    document.removeEventListener("keydown", this.logoutListener);
   }
 
   login(email, password) {
@@ -69,7 +67,7 @@ export default class App extends React.Component {
         email,
         password,
         isLoggedIn: true,
-      }
+      },
     });
     // update context
     this.context.user = {
@@ -80,36 +78,38 @@ export default class App extends React.Component {
   }
 
   logoutListener(event) {
-    if (event.ctrlKey && event.key === 'h') {
+    if (event.ctrlKey && event.key === "h") {
       // console.log("running logoutListener")
-      alert('Logging you out');
+      alert("Logging you out");
       this.state.logout();
     }
-  };
+  }
 
   markNotificationAsRead(id) {
-    let ln = this.state.listNotifications
+    let ln = this.state.listNotifications;
     this.setState({
       listNotifications: ln.filter((note) => note.id !== id),
     });
-  };
+  }
 
-  render () {
+  render() {
     const style = StyleSheet.create({
       body: {
-        padding: '2% 3%',
-        height: '480px',
-        '@media (max-width: 900px)': {
-          display: this.state.displayDrawer ? 'none' : 'block',
+        padding: "2% 3%",
+        height: "480px",
+        "@media (max-width: 900px)": {
+          display: this.state.displayDrawer ? "none" : "block",
         },
       },
     });
 
     return (
-      <AppContext.Provider value={{user: this.state.user, logout: this.state.logout}}>
-        <div className='App'>
+      <AppContext.Provider
+        value={{ user: this.state.user, logout: this.state.logout }}
+      >
+        <div className="App">
           <Notifications
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={this.props.displayDrawer}
             listNotifications={this.state.listNotifications}
             handleHideDrawer={this.handleHideDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
@@ -117,15 +117,16 @@ export default class App extends React.Component {
           />
           <Header />
           <div className={`App-body ${css(style.body)}`}>
-            {this.state.user.isLoggedIn ?
-              <BodySectionWithMarginBottom title='Course list'>
+            {this.state.user.isLoggedIn ? (
+              <BodySectionWithMarginBottom title="Course list">
                 <CourseList listCourses={listCourses} />
               </BodySectionWithMarginBottom>
-              : <BodySectionWithMarginBottom title='Log in to continue'>
-                  <Login login={this.login} />
-                </BodySectionWithMarginBottom>
-            }
-            <BodySection title='News from the School'>
+            ) : (
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <Login login={this.login} />
+              </BodySectionWithMarginBottom>
+            )}
+            <BodySection title="News from the School">
               <p>my balognia has a first name...</p>
             </BodySection>
           </div>
@@ -150,8 +151,8 @@ export function mapStateToProps(state) {
     isLoggedIn: state.ui.isUserLoggedIn,
     isNotificationDrawerVisible: state.ui.isNotificationDrawerVisible,
     user: state.ui.user,
-  }
-};
+  };
+}
 // connect(mapStateToProps)(App);
 // export function mapDispatchToProps(dispatch) {
 //   return {
@@ -162,4 +163,6 @@ export function mapStateToProps(state) {
 //   }
 // }
 
-export const ReduxApp = connect(mapStateToProps, null, null, { context: AppContext })(App);
+export const ReduxApp = connect(mapStateToProps, null, null, {
+  context: AppContext,
+})(App);

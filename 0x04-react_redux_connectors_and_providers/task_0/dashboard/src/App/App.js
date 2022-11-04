@@ -109,7 +109,7 @@ export default class App extends React.Component {
       <AppContext.Provider value={{user: this.state.user, logout: this.state.logout}}>
         <div className='App'>
           <Notifications
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={this.props.displayDrawer}
             listNotifications={this.state.listNotifications}
             handleHideDrawer={this.handleHideDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
