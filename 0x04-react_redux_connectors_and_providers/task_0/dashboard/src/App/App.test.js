@@ -57,12 +57,14 @@ describe('App Renders', () => {
     assert.equal(footerRender.length, 1);
   });
 
-  it('an alert and calls the function logout when ctrl-h is pressed', () => {
-    document.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: 'h' }));
-    expect(alert).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Logging you out');
-    expect(logout).toHaveBeenCalled();
-  });
+  // test moved to the MapStateToProps test
+
+  // it('an alert and calls the function logout when ctrl-h is pressed', () => {
+  //   document.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: 'h' }));
+  //   expect(alert).toHaveBeenCalled();
+  //   expect(alert).toHaveBeenCalledWith('Logging you out');
+  //   expect(logout).toHaveBeenCalled();
+  // });
 
   it('app.state.displayDrawer is false, and true after handleDisplayDrawer', () => {
     assert.equal(app.state().displayDrawer, false);
@@ -70,15 +72,17 @@ describe('App Renders', () => {
     assert.equal(app.state().displayDrawer, true);
   });
 
-  it('app.state.displayDrawer is true, and false after handleHideDrawer', () => {
-    app.instance().handleHideDrawer();
-    assert.equal(app.state().displayDrawer, false);
-  });
+  // test moved to the MapStateToProps test
 
-  it('does not log in when enableSubmit = false and form is submitted', () => {
-    app.find('form').simulate('submit')
-    expect(alert).toHaveBeenCalledWith('Please enter email and password to proceed');
-  });
+  // it('app.state.displayDrawer is true, and false after handleHideDrawer', () => {
+  //   app.instance().handleHideDrawer();
+  //   assert.equal(app.state().displayDrawer, false);
+  // });
+
+  // it('does not log in when enableSubmit = false and form is submitted', () => {
+  //   app.find('form').simulate('submit')
+  //   expect(alert).toHaveBeenCalledWith('Please enter email and password to proceed');
+  // });
 
   it('logs in when email & password are entered and form is submitted', () => {
     app.find('form').find('input').first().simulate('change', { target: { value: 'a@b' }});
@@ -91,13 +95,12 @@ describe('App Renders', () => {
     })
   });
 
-  it('updated Notifications when one is clicked, will run markNotificationAsRead', () => {
-    app.find('.menuItem').simulate('click');
-    assert.equal(app.find('NotificationItem').length, 3);
-    // was unable to spyOn markNot func in app.instance() or in the props of first()
-    app.find('NotificationItem').first().simulate('click');
-    assert.equal(app.find('NotificationItem').length, 2);
-  });
+  // it('updated Notifications when one is clicked, will run markNotificationAsRead', () => {
+  //   app.find('.menuItem').simulate('click');
+  //   assert.equal(app.find('NotificationItem').length, 3);
+  //   app.find('NotificationItem').first().simulate('click');
+  //   assert.equal(app.find('NotificationItem').length, 2);
+  // });
 
   it('NOT the CourseList', () => {
     assert.equal(courseListRender.length, 0);
