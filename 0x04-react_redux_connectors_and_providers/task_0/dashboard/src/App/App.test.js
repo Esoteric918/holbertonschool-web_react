@@ -1,8 +1,9 @@
 import React from 'react';
-import App from './App';
+import App, { mapStateToProps } from './App';
 import { mount } from 'enzyme';
-import { assert } from 'chai';
+import { assert, expect } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { fromJS } from 'immutable';
 
 global.console.log = jest.fn()
 
@@ -131,3 +132,26 @@ describe('Logged in App Renders', () => {
     assert.equal(login.length, 0);
   });
 });
+
+describe('App mapStateToProps', () => {
+  it('returns the right object', () => {
+    let state = fromJS({
+      isUserLoggedIn: true,
+
+    });
+    const props = mapStateToProps(state);
+    expect(props).to.deep.equal({
+      isLoggedIn: true,
+    });
+  });
+  // it('checks if mapStateToProps returns isNotificationDrawerVisible', () => {
+  //   let state = fromJS({
+  //     isNotificationDrawerVisible: true,
+  //   });
+  //   const props = mapStateToProps(state);
+  //   expect(props).to.deep.equal({
+  //     displayDrawer: true,
+  //   });
+  // })
+});
+
