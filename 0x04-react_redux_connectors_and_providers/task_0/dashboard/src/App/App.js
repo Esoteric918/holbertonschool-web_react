@@ -21,7 +21,7 @@ const listCourses = [
 ];
 
 
-class App extends React.Component {
+export default class App extends React.Component {
   static contextType = AppContext;
 
   constructor(props) {
@@ -144,14 +144,22 @@ App.defaultProps = {
   isLoggedIn: false,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
+  console.log(state);
   return {
-    isLoggedIn: state.ui.get('isUserLoggedIn'),
-    isNotificationDrawerVisible: state.ui.get('isNotificationDrawerVisible'),
-    user: state.ui.get('user'),
+    isLoggedIn: state.ui.isUserLoggedIn,
+    isNotificationDrawerVisible: state.ui.isNotificationDrawerVisible,
+    user: state.ui.user,
   }
-}
+};
+// connect(mapStateToProps)(App);
+// export function mapDispatchToProps(dispatch) {
+//   return {
+//     displayDrawer: () => dispatch({ type: 'DISPLAY_DRAWER' }),
+//     hideDrawer: () => dispatch({ type: 'HIDE_DRAWER' }),
+//     login: (email, password) => dispatch({ type: 'LOGIN', user: { email, password } }),
+//     logout: () => dispatch({ type: 'LOGOUT' }),
+//   }
+// }
 
-connect(mapStateToProps)(App);
-
-export default App;
+export const ReduxApp = connect(mapStateToProps, null, null, { context: AppContext })(App);

@@ -1,1 +1,1 @@
-# 0x09-React_Redux_reducer
+# 0x04. React Redux Connectors and Providers

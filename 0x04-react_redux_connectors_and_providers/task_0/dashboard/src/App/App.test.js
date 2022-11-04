@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { mapStateToProps } from './App';
+import App, { mapStateToProps,} from './App';
 import { mount } from 'enzyme';
 import { assert, expect } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
@@ -135,13 +135,18 @@ describe('Logged in App Renders', () => {
 
 describe('App mapStateToProps', () => {
   it('returns the right object', () => {
-    let state = fromJS({
-      isUserLoggedIn: true,
-
-    });
+    let state = {
+      ui: {
+        isUserLoggedIn: true,
+        isNotificationDrawerVisible: true,
+        user: {},
+      }
+    };
     const props = mapStateToProps(state);
-    expect(props).to.deep.equal({
-      isLoggedIn: true,
+    expect(props).deep.equal({
+      isLoggedIn: state.ui.isUserLoggedIn,
+      isNotificationDrawerVisible: state.ui.isNotificationDrawerVisible,
+      user: state.ui.user,
     });
   });
   // it('checks if mapStateToProps returns isNotificationDrawerVisible', () => {

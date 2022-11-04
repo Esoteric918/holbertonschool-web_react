@@ -1,29 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App/App';
-import { configureStore } from '@reduxjs/toolkit';
+import { ReduxApp } from './App/App';
 import { Provider} from 'react-redux';
-import uiReducer  from './reducers/uiReducer';
 
-const store = configureStore({
-  reducer: {
-    ui: uiReducer,
-  },
-  preloadedState: {
-    ui: {
-      isNotificationDrawerVisible: false,
-      isUserLoggedIn: false,
-      user: {},
-    },
-  },
-});
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+
+      <ReduxApp />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
