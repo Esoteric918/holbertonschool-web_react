@@ -5,7 +5,9 @@ import uiReducer  from '../reducers/uiReducer';
 
 //create redux store and export it
 const store = configureStore({
-  reducer: uiReducer,
+  reducer: {
+    ui: uiReducer,
+  },
   preloadedState: {
     ui: uiReducer(undefined, {}),
   },

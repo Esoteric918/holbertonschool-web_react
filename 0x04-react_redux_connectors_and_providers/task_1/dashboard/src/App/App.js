@@ -8,10 +8,10 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
-import WithLogging from "../HOC/WithLogging";
 import { getLatestNotification } from "../utils/utils";
 import AppContext from "./AppContext";
 import { connect } from "react-redux";
+import * as uiActions from '../actions/uiActionCreators';
 
 const listCourses = [
   { id: "1", name: "ES6", credit: 60 },
@@ -34,21 +34,21 @@ export default class App extends React.Component {
         { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
       ],
     };
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    // this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    // this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logoutListener = this.logoutListener.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.login = this.login.bind(this);
     this.state.logout = this.state.logout.bind(this);
   }
 
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
+  // handleDisplayDrawer() {
+  //   this.setState({ displayDrawer: true });
+  // }
 
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
+  // handleHideDrawer() {
+  //   this.setState({ displayDrawer: false });
+  // }
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeydown);
@@ -111,8 +111,8 @@ export default class App extends React.Component {
           <Notifications
             displayDrawer={this.props.displayDrawer}
             listNotifications={this.state.listNotifications}
-            handleHideDrawer={this.handleHideDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.props.hideNotificationDrawer}
+            handleDisplayDrawer={this.props.displayNotificationDrawer}
             markNotificationAsRead={this.markNotificationAsRead}
           />
           <Header />
@@ -149,20 +149,19 @@ export function mapStateToProps(state) {
   console.log(state);
   return {
     isLoggedIn: state.ui.isUserLoggedIn,
-    isNotificationDrawerVisible: state.ui.isNotificationDrawerVisible,
+    displayDrawer: state.ui.isNotificationDrawerVisible,
     user: state.ui.user,
   };
-}
-// connect(mapStateToProps)(App);
-// export function mapDispatchToProps(dispatch) {
-//   return {
-//     displayDrawer: () => dispatch({ type: 'DISPLAY_DRAWER' }),
-//     hideDrawer: () => dispatch({ type: 'HIDE_DRAWER' }),
-//     login: (email, password) => dispatch({ type: 'LOGIN', user: { email, password } }),
-//     logout: () => dispatch({ type: 'LOGOUT' }),
-//   }
-// }
+};
 
-export const ReduxApp = connect(mapStateToProps, null, null, {
+export function mapDispatchToProps(dispatch) {
+  return {
+    displayNotificationDrawer: () => dispatch(uiActions.displayNotificationDrawer()),
+    hideNotificationDrawer: () => dispatch(uiActions.hideNotificationDrawer()),
+  };
+};
+
+
+export const ReduxApp = connect(mapStateToProps, mapDispatchToProps, null, {
   context: AppContext,
 })(App);

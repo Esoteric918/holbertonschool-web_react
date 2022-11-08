@@ -1,9 +1,10 @@
 import React from 'react';
 import App, { mapStateToProps,} from './App';
 import { mount } from 'enzyme';
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
 import { fromJS } from 'immutable';
+import * as uiActions from '../actions/uiActionCreators';
 
 global.console.log = jest.fn()
 
@@ -57,23 +58,22 @@ describe('App Renders', () => {
     assert.equal(footerRender.length, 1);
   });
 
-  // test moved to the MapStateToProps test
 
-  // it('an alert and calls the function logout when ctrl-h is pressed', () => {
-  //   document.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: 'h' }));
-  //   expect(alert).toHaveBeenCalled();
-  //   expect(alert).toHaveBeenCalledWith('Logging you out');
-  //   expect(logout).toHaveBeenCalled();
-  // });
 
-  it('app.state.displayDrawer is false, and true after handleDisplayDrawer', () => {
-    assert.equal(app.state().displayDrawer, false);
-    app.instance().handleDisplayDrawer();
-    assert.equal(app.state().displayDrawer, true);
+  it('an alert and calls the function logout when ctrl-h is pressed', () => {
+    document.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: 'h' }));
+    expect(alert).toHaveBeenCalled();
+    expect(alert).toHaveBeenCalledWith('Logging you out');
+    expect(logout).toHaveBeenCalled();
   });
 
-  // test moved to the MapStateToProps test
+  // it('app.state.displayDrawer is false, and true after handleDisplayDrawer', () => {
+  //   return uiActions.displayNotificationDrawer().then(() => {
+  //     expect(app.state().displayDrawer).to.equal(true);
+  //   });
+  // });
 
+ // test moved to the MapStateToProps test
   // it('app.state.displayDrawer is true, and false after handleHideDrawer', () => {
   //   app.instance().handleHideDrawer();
   //   assert.equal(app.state().displayDrawer, false);
@@ -146,9 +146,9 @@ describe('App mapStateToProps', () => {
       }
     };
     const props = mapStateToProps(state);
-    expect(props).deep.equal({
+    expect(props) .toEqual({
       isLoggedIn: state.ui.isUserLoggedIn,
-      isNotificationDrawerVisible: state.ui.isNotificationDrawerVisible,
+      displayDrawer: state.ui.isNotificationDrawerVisible,
       user: state.ui.user,
     });
   });

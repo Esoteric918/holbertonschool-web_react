@@ -6,7 +6,6 @@ import {
   LOGIN_FAILURE,
   DISPLAY_NOTIFICATION_DRAWER,
   HIDE_NOTIFICATION_DRAWER,
-
  } from './uiActionTypes';
 
 export const login = (email, password) => ({
@@ -22,12 +21,30 @@ export const logout = () => ({
 });
 
 export const logginSuccess = () => ({
-  type: LOGGIN_SUCCESS,
+  type: LOGIN_SUCCESS,
 });
 
 export const logginFailure = () => ({
-  type: LOGGIN_FAILURE,
+  type: LOGIN_FAILURE,
 });
+
+
+
+export const displayNotificationDrawer = () => ({
+  type: DISPLAY_NOTIFICATION_DRAWER,
+});
+
+export const hideNotificationDrawer = () => ({
+  type: HIDE_NOTIFICATION_DRAWER,
+});
+
+export const boundActionCreators = (dispatch) =>
+  bindActionCreators({
+    login,
+    logout,
+    displayNotificationDrawer,
+    hideNotificationDrawer,
+  }, dispatch);
 
 export function logginRequest(email, password) {
   return async (dispatch) => {
@@ -45,19 +62,3 @@ export function logginRequest(email, password) {
     }
   };
 }
-
-export const displayNotificationDrawer = () => ({
-  type: DISPLAY_NOTIFICATION_DRAWER,
-});
-
-export const hideNotificationDrawer = () => ({
-  type: HIDE_NOTIFICATION_DRAWER,
-});
-
-export const boundActionCreators = (dispatch) =>
-  bindActionCreators({
-    login,
-    logout,
-    displayNotificationDrawer,
-    hideNotificationDrawer,
-  }, dispatch);

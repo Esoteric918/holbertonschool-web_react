@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const uiReducer = (state = initialState, action) => {
+  // console.log(state);
   switch (action.type) {
     case DISPLAY_NOTIFICATION_DRAWER:
       return {
